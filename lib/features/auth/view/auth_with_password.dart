@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
 import '../../complaints/view/compalints_page.dart';
 import '../bloc/authentication_bloc.dart';
 import '../bloc/authentication_event.dart';
 import '../bloc/authentication_state.dart';
 
-class AuthScreen extends StatelessWidget {
+class AuthWithPassword extends StatelessWidget {
   final TextEditingController _passwordController = TextEditingController();
 
-  AuthScreen({super.key});
+  AuthWithPassword({super.key});
 
   void _authenticate(BuildContext context) {
     final password = _passwordController.text;
-    context.read<AuthenticationBloc>().add(AuthenticateEvent(password));
+    context.read<AuthenticationBloc>().add(AuthenticateWithPassword(password));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text('Auth App')),
+        title: Center(child: Text('Password Authentication')),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -44,7 +43,6 @@ class AuthScreen extends StatelessWidget {
             BlocListener<AuthenticationBloc, AuthenticationState>(
               listener: (context, state) {
                 if (state is AuthenticationLoading) {
-                  // Optionally show a loading indicator
                 } else if (state is AuthenticationSuccess) {
                   Fluttertoast.showToast(
                     msg: "You are authorized",

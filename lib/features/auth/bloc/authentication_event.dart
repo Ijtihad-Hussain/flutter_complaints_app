@@ -5,11 +5,25 @@ abstract class AuthenticationEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AuthenticateEvent extends AuthenticationEvent {
+class AuthenticateWithPassword extends AuthenticationEvent {
   final String password;
 
-  AuthenticateEvent(this.password);
+  AuthenticateWithPassword(this.password);
 
   @override
   List<Object> get props => [password];
+}
+
+class AuthenticateWithFingerprint extends AuthenticationEvent {
+
+}
+
+class AuthenticateWithFaceID extends AuthenticationEvent {
+
+}
+
+class AuthenticateWithPIN extends AuthenticationEvent {
+  final String pin;
+
+  AuthenticateWithPIN(this.pin);
 }
